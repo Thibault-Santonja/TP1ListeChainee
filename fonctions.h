@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef MAX
 #define MAX 10
+#endif
 
 typedef struct element Elem;
 struct element
