@@ -8,8 +8,8 @@ typedef struct element
 
 typedef struct list
 {
-	List* head;
-	List* tail;
+	Elem* head;
+	Elem* tail;
 } List;
 
 void initialize (List *list);
