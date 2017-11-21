@@ -4,7 +4,7 @@ main : main.o liste.o
 main.o : main.c
 	gcc -o main.o -c main.c -W -Wall
 
-liste.o : liste.c fonction.h
+liste.o : liste.c fonctions.h
 	gcc -o liste.o -c liste.c -W -Wall
 
 clean : 

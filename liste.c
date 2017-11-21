@@ -1,3 +1,4 @@
+#include "fonctions.h"
 
 void initialize (List* list) {
 	Elem* new_elem = malloc(sizeof (Elem));
@@ -35,7 +36,7 @@ void insert_end_list (List *list, char *str) {
 	next_elem->next = new_elem;
 
 	new_elem->data = str;
-	new_elem->next = list->NULL;
+	new_elem->next = NULL;
 	list->tail = new_elem;
 
 }
@@ -62,7 +63,7 @@ int insert_after_position (List *list, char *str, int p) {
 }
 
 
-int remove (List *list, int p) {
+int remove_ (List *list, int p) {
 	Elem* next_elem = list->head;
 	int cmpt = 0;
 
@@ -87,7 +88,7 @@ int compare (char *str1, char *str2) {
 	unsigned int mult = 1;
 
 	for (; i <= MAX; i++, mult *= 10) 
-		res = (str1 [MAX - i] - str2 [MAX - i]) * mult
+		res = (str1 [MAX - i] - str2 [MAX - i]) * mult;
 
 	if (res > 0)
 		return 1;
