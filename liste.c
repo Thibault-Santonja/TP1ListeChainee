@@ -97,6 +97,7 @@ int compare (char *str1, char *str2) {
 
 
 int sort (List *list) {
+	
 	/* TODO */
 
 	return 0;
@@ -104,7 +105,9 @@ int sort (List *list) {
 
 
 void display (List *list) {
+
 	/* TODO */
+
 }
 
 
