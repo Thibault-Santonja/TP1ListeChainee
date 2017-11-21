@@ -1,4 +1,4 @@
-main : main.o liste.o
+TP1_liste_chainee : main.o liste.o
 	gcc -o TP1_liste_chainee main.o liste.o
 
 main.o : main.c

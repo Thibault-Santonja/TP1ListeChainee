@@ -2,7 +2,7 @@
 
 void initialize (List* list) {
 	Elem* new_elem = malloc(sizeof (Elem));
-	new_elem->data = malloc(sizeof ((char) * MAX));
+	new_elem->data = malloc(sizeof (char) * MAX);
 	new_elem->next = NULL;
 
 	list->head = new_elem;
@@ -98,6 +98,8 @@ int compare (char *str1, char *str2) {
 
 int sort (List *list) {
 	/* TODO */
+
+	return 0;
 }
 
 
