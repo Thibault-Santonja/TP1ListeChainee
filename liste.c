@@ -2,12 +2,12 @@
 
 void initialize (List* list) {
 	list = malloc(sizeof (List));
-	//Elem* new_elem = malloc(sizeof (Elem));
-	//new_elem->data = malloc(sizeof (char) * MAX);
-	//new_elem->next = NULL;
+	Elem* new_elem = malloc(sizeof (Elem));
+	new_elem->data = malloc(sizeof (char) * MAX);
+	new_elem->next = NULL;
 
-	list->head = NULL;
-	list->tail = NULL;
+	list->head = new_elem;
+	list->tail = new_elem;
 }
 
 

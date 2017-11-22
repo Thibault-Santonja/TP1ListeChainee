@@ -23,7 +23,7 @@ void insert_begining_list (List *list, char *str) {
 	new_elem->next = list->head;
 	list->head = new_elem;
 }
-
+https://www.google.fr/search?q=utspace+slack&ie=utf-8&oe=utf-8&gws_rd=cr&dcr=0&ei=20QVWqeXJoHWa7Lbo5AF
 
 void insert_end_list (List *list, char *str) {
 	Elem* new_elem = malloc(sizeof (Elem));
@@ -142,7 +142,7 @@ int concatener(struct List liste1, struct List liste2)
 }
 
 
-struct List sort (List *list) --------------------------------------------------------------------------------------
+struct List sort (List *list) //--------------------------------------------------------------------------------------
 {
     if (element_seul (list) == 1)
         return list;
