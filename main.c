@@ -27,7 +27,7 @@ int main()
 			insert_end_list(ma_liste, &response);
 		}
 		
-		printf ("voulez vous ajouter un nombre en début de liste ? (oui : 1, non : 0)\n");
+		printf ("voulez vous ajouter un nombre à une certaine position de la liste ? (oui : 1, non : 0)\n");
 		scanf ("%d", &flag);
 		if (flag) {
 			printf ("Saisissez votre nombre ?\n");
