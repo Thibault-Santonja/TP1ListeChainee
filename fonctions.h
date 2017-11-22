@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 #ifndef MAX
@@ -8,7 +9,7 @@
 typedef struct element Elem;
 struct element
 {
-	char* data;
+	char data[MAX];
 	Elem* next;
 };
 
@@ -19,7 +20,7 @@ struct list
 	Elem* tail;
 };
 
-void initialize (List *list);
+void initialize (List **list);
 
 void insert_empty_list (List *list, char *str);
 

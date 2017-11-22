@@ -2,30 +2,14 @@
 
 
 int main()
-{/*
-	Elem* test = malloc (sizeof (Elem));
-	test->data = malloc (sizeof (char) * MAX);
-
-	test->data[1] = 'a';
-
-	printf("2. \n");
-
-	printf("test data : %c\n", test->data[1]);
-
-	printf("3. \n");
-
-	free(test->data);
-	free(test);
-
-	printf("4. \n");
-*/
+{
 
 	int flag = 1;
 	char* response = malloc (sizeof (char) * MAX);
 	int place = 0;
 	List* ma_liste = NULL;
 
-	initialize (ma_liste);
+	initialize (&ma_liste);
 
 	while (flag) {
 		printf ("voulez vous ajouter un nombre en début de liste ? (oui : 1, non : 0)\n");

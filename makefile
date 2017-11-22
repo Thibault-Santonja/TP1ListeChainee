@@ -8,4 +8,4 @@ liste.o : liste.c fonctions.h
 	gcc -o liste.o -c liste.c -W -Wall
 
 clean : 
-	rm -rf *.o
+	@rm -rf *.o

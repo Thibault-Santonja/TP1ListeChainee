@@ -1,49 +1,42 @@
 #include "fonctions.h"
 
-void initialize (List* list) {
-	list = malloc(sizeof (List));
+void initialize (List** list) {
+	*list = malloc(sizeof (List));
 	//Elem* new_elem = malloc(sizeof (Elem));
 	//new_elem->data = malloc(sizeof (char) * MAX);
 	//new_elem->next = NULL;
 
-	list->head = malloc (sizeof (Elem));
-	list->tail = malloc (sizeof (Elem));
-
-	list->head = NULL;
-	list->tail = NULL;
+	(*list)->head = NULL;
+	(*list)->tail = NULL;
 }
 
-
+/*
 void insert_empty_list (List *list, char *str) {
-	if (list->head == list->tail)
-		list->head->data = str;
+	Elem* new_elem = malloc (sizeof (Elem));
 
-}
+	new_elem->data = str;
+}*/
 
 
 void insert_begining_list (List *list, char *str) {
 	Elem* new_elem = malloc (sizeof (Elem));
-	new_elem->data = malloc (sizeof (char) * MAX);
-	
-	printf("bouh\n");
 
 	new_elem->data = str;
-	printf("bouhBIS\n");
 	new_elem->next = list->head;
-	printf("bauhTris\n");
 	list->head = new_elem;
-	printf("bouhQuad\n");
-
 }
 
 void insert_end_list (List *list, char *str) {
 	Elem* new_elem = malloc(sizeof (Elem));
 	Elem* next_elem = list->head;
 
+
 	while (next_elem != NULL)
 		next_elem = next_elem->next;
 
+	printf("bouh\n");
 	next_elem->next = new_elem;
+	printf("bouhBis\n");
 
 	new_elem->data = str;
 	new_elem->next = NULL;
