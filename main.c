@@ -8,6 +8,8 @@ int main()
 	int place = 0;
 	List* ma_liste = NULL;
 
+	initialize (ma_liste);
+
 	while (flag) {
 		printf ("voulez vous ajouter un nombre en début de liste ? (oui : 1, non : 0)\n");
 		scanf ("%d", &flag);

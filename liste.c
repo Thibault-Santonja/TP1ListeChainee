@@ -1,12 +1,13 @@
 #include "fonctions.h"
 
 void initialize (List* list) {
-	Elem* new_elem = malloc(sizeof (Elem));
-	new_elem->data = malloc(sizeof (char) * MAX);
-	new_elem->next = NULL;
+	list = malloc(sizeof (List));
+	//Elem* new_elem = malloc(sizeof (Elem));
+	//new_elem->data = malloc(sizeof (char) * MAX);
+	//new_elem->next = NULL;
 
-	list->head = new_elem;
-	list->tail = new_elem;
+	list->head = NULL;
+	list->tail = NULL;
 }
 
 
@@ -18,7 +19,8 @@ void insert_empty_list (List *list, char *str) {
 
 
 void insert_begining_list (List *list, char *str) {
-	Elem* new_elem = malloc(sizeof (Elem));
+	Elem* new_elem = malloc (sizeof (Elem));
+	new_elem->data = malloc (sizeof (char) * MAX);
 
 	new_elem->data = str;
 	new_elem->next = list->head;
