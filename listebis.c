@@ -95,9 +95,9 @@ int compare (char *str1, char *str2) {
 
 //----------------------------------------------------------
 
-int element_seul (struct List list)
+int element_seul (List list)
 {
-    struct element elem = list.tete;
+    Elem elem = list.tete;
     while (elem.data != 0)
     {
         if (elem.suiv == NULL)
@@ -110,7 +110,7 @@ int element_seul (struct List list)
 }
 
 
-char* read_nb (struct element elem)
+char* read_nb (Elem elem)
 {
     char* nb = "";
     while (elem.data != 0 && elem.next != NULL)
@@ -122,7 +122,7 @@ char* read_nb (struct element elem)
 
 
 
-char* nb_suivant (struct element elem)
+char* nb_suivant (Elem elem)
 {
     char * nb = "";
     while (elem.data != 0)
@@ -136,15 +136,15 @@ char* nb_suivant (struct element elem)
 }
 
 
-int concatener(struct List liste1, struct List liste2)
+int concatener(List liste1, List liste2)
 {
     liste1.tail = liste2.tete;
 }
 
 
-struct List sort (List *list) //--------------------------------------------------------------------------------------
+List sort (List *list) //--------------------------------------------------------------------------------------
 {
-    if (element_seul (list) == 1)
+    if (Elem_seul (list) == 1)
         return list;
     else
     {
@@ -155,19 +155,19 @@ struct List sort (List *list) //------------------------------------------------
         // superieurs = pivot; Comment l'initialiser ?
         List inferieurs;
         initialize(inferieurs);
-        struct Elem pivot = list.head;
+        Elem pivot = list.head;
         char * valeur_pivot;
-        struct Elem nb_a_comparer = list.head;
+        Elem nb_a_comparer = list.head;
         while (nb_a_comparer.tete != list.queue)
         {
             nb_a_comparer = nb_suiv (nb_a_comparer);
             if (compare (nb_a_comparer, valeur_pivot) >= 0)
-                insert_nb(nb_a_comparer, superieurs); // nb_a_comparer est un char*, on doit inserer des elements...
+                insert_nb(nb_a_comparer, superieurs); // nb_a_comparer est un char*, on doit inserer des Elems...
             else
                 insert_nb(nb_a_comparer, inferieurs);
         }
     }
-    struct List liste_triee;
+    List liste_triee;
 
     liste_triee = sort (inferieurs);
     concatener (liste_triee, superieurs);
@@ -183,7 +183,7 @@ void display (List *list) {
 }
 
 
-void destruct (List *list) {
+void de(List *list) {
 	Elem* next_elem = list->head;
 	Elem* elem_destroy;
 
