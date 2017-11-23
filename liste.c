@@ -1,91 +1,147 @@
 #include "fonctions.h"
 
-void initialize (List** list) {
-	*list = malloc(sizeof (List));
-	//Elem* new_elem = malloc(sizeof (Elem));
-	//new_elem->data = malloc(sizeof (char) * MAX);
-	//new_elem->next = NULL;
-
+void initialize (List** list) {	//création d'une structure avec les pointeurs sur la tete et la queue de la liste
+	(*list) = malloc(sizeof (List));
 	(*list)->head = NULL;
 	(*list)->tail = NULL;
 }
 
-/*
-void insert_empty_list (List *list, char *str) {
+
+void insert_empty_list (List* list, char *str) {	//insertion dans une liste vide
 	Elem* new_elem = malloc (sizeof (Elem));
-
-	new_elem->data = str;
-}*/
-
-
-void insert_begining_list (List *list, char *str) {
-	Elem* new_elem = malloc (sizeof (Elem));
-
-	new_elem->data = str;
-	new_elem->next = list->head;
+	strcpy(new_elem->data, str);
 	list->head = new_elem;
+	list->tail = new_elem;
 }
 
-void insert_end_list (List *list, char *str) {
-	Elem* new_elem = malloc(sizeof (Elem));
+
+void insert_begining_list (List *list, char *str) {		// insertion en début de liste
+	if (list->head == NULL)
+		insert_empty_list(list, str);
+	else {
+		Elem* new_elem = malloc (sizeof (Elem));
+		strcpy (new_elem->data, str);
+
+		new_elem->next = list->head;
+		list->head = new_elem;
+	}
+}
+
+void insert_end_list (List *list, char *str) {		// insertion en fin de liste
+	if (list->tail == NULL)
+		insert_empty_list(list, str);
+	Elem* tmp = list->tail;
+	Elem* new_elem = malloc (sizeof (Elem));
+	strcpy (new_elem->data, str);
+
+	new_elem->next = NULL;
+	tmp->next = new_elem;
+	list->tail = new_elem;
+}
+
+int size_list (List *list) {		// renvoie la taille de la liste
+	int cmpt = 0;
 	Elem* next_elem = list->head;
 
-
-	while (next_elem != NULL)
+	while (next_elem != NULL) {
 		next_elem = next_elem->next;
+		cmpt++;
+	}
 
-	printf("bouh\n");
-	next_elem->next = new_elem;
-	printf("bouhBis\n");
-
-	new_elem->data = str;
-	new_elem->next = NULL;
-	list->tail = new_elem;
-
+	return cmpt;
 }
 
-
-int insert_after_position (List *list, char *str, int p) {
+int insert_after_position (List *list, char *str, int p) {	// insertion de str après la position p
 	Elem* new_elem = malloc(sizeof (Elem));
 	Elem* next_elem = list->head;
 	int cmpt = 0;
 
+	if (p == 0) {
+		insert_begining_list (list, str);
+		return 1;
+	}
+
+	if (p == size_list(list)) {
+		insert_end_list (list, str);
+		return 1;
+	}
+
 	while (cmpt < p) {
 		if (next_elem == NULL)
-			return -1;
+			return 0;
 
 		next_elem = next_elem->next;
 		cmpt++;
 	}
 
-	new_elem->data = str;
+
+	strcpy(new_elem->data, str);
 	new_elem->next = next_elem->next;
 	next_elem->next = new_elem; 
 
-	return 0;
+	return 1;
 }
 
-
-int remove_ (List *list, int p) {
+void remove_begining (List* list) {	//suppression début de liste
 	Elem* next_elem = list->head;
+	Elem* temp = NULL;
+
+	temp = next_elem->next;
+	free(list->head);
+	list->head = temp;
+}
+
+void remove_ending (List *list) {	//suppression fin de liste
+	Elem* next_elem = list->head;
+	Elem* temp = NULL;
+
+	while (next_elem->next != NULL) {
+		temp = next_elem;
+		next_elem = next_elem->next;
+	}
+
+	temp->next = NULL;
+	list->tail = temp;
+	free (next_elem);
+}
+
+void remove_inside (List *list, int p) {	//suppression dans la liste
+	Elem* next_elem = list->head;
+	Elem* temp = NULL;
 	int cmpt = 0;
 
-	while (cmpt < p) {
-		if (next_elem == NULL)
-			return -1;
-		
+	while (cmpt < p) {		
 		next_elem = next_elem->next;
 		cmpt++;
 	}
 
-	next_elem->next = next_elem->next->next;
-	free (next_elem->next->next);
+	temp = next_elem->next;
+	next_elem->next = (next_elem->next)->next;
+	free (temp);
+}
 
-	return 0;
+int remove_ (List *list, int p) {	//"menu" de suppression
+	Elem* next_elem = list->head;
+
+	if ((next_elem == NULL) || p > size_list(list))			//erreur pas d'element, ou élément à supprimer inexistant
+		return 0;
+	else if (size_list < 2) {		//suppression si un seul élément
+		free (list->head);
+		list->head = NULL;
+		list->tail = NULL;
+	}
+	else if (p == 0)				//suppression du premier élément
+		remove_begining (list);
+	else if (p == size_list (list))	//suppression du dernier élément
+		remove_ending (list);
+	else 							//sinon suppression en milieu de liste
+		remove_inside (list, p);
+
+	return 1;
 }
 
 
-int compare (char *str1, char *str2) {
+int compare (char *str1, char *str2) {	//vérifie que str1 est plus grand que str2
 	int i = 1;
 	int res = 0;
 	unsigned int mult = 1;
@@ -95,26 +151,31 @@ int compare (char *str1, char *str2) {
 
 	if (res > 0)
 		return 1;
-	return 2;
-}
-
-
-int sort (List *list) {
-	
-	/* TODO */
-
 	return 0;
 }
 
 
-void display (List *list) {
-
+int sort (List *list) {	//tri la liste
+	
 	/* TODO */
 
+	return 1;
 }
 
 
-void destruct (List *list) {
+void display (List *list) { //affiche la liste
+	Elem* next_elem = list->head;
+	int cmpt = 1;
+
+	while (next_elem != NULL) {
+		printf("position %d : %d\n", cmpt, next_elem->data[cmpt - 1]);
+		next_elem = next_elem->next;
+		cmpt++;
+	}
+}
+
+
+void destruct (List *list) {	//supprime toute la liste
 	Elem* next_elem = list->head;
 	Elem* elem_destroy;
 

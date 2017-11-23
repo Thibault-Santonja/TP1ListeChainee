@@ -39,3 +39,11 @@ int sort (List *list);
 void display (List *list);
 
 void destruct (List *list);
+
+int size_list (List *list);
+
+void remove_begining (List* list);
+
+void remove_inside (List *list, int p);
+
+void remove_ending (List *list);
