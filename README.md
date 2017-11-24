@@ -17,11 +17,11 @@ TP1 NF16 UTC
 
 → UTILISER GIT :
     - PUSH : quand tu veux mettre en ligne un fichier, tu fais :
-        "git add <nom du fichier" exemple "git add main.c" (tu peux aussi tout add en faisant "git add --all")
-        "git commit -m "<message>" "
-        "git push origin master" (tu push de l'origin vers la branche master (on a que cette branche là)) tu peux aussi écrire "git push"
+        - "git add <nom du fichier" exemple "git add main.c" (tu peux aussi tout add en faisant "git add --all")
+        - "git commit -m "<message>" "
+        - "git push origin master" (tu push de l'origin vers la branche master (on a que cette branche là)) tu peux aussi écrire "git push"
     - PULL : pour récupérer ce qui est déjà en ligne dans git, tu fais :
-        "git pull" 
+        - "git pull" 
 
 
 → COMMANDES UNIX
