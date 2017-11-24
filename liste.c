@@ -1,4 +1,5 @@
 #include "fonctions.h"
+//#include "quicksort.c"
 
 void initialize (List** list) {	// création d'une structure avec les pointeurs sur la tete et la queue de la liste
 	(*list) = malloc(sizeof (List));
@@ -180,7 +181,7 @@ void display (List *list) { //affiche la liste
 void destruct (List *list) {	//supprime toute la liste
 
 	/* TO DO */
-	
+
 	Elem* next_elem = list->head;
 	Elem* elem_destroy;
 
