@@ -190,3 +190,5 @@ void destruct (List *list) {	//supprime toute la liste
 	free (list->tail);
 	free (list);
 }
+
+
