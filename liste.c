@@ -1,8 +1,8 @@
 #include "fonctions.h"
 
-void initialize (List** list) {	//création d'une structure avec les pointeurs sur la tete et la queue de la liste
+void initialize (List** list) {	// création d'une structure avec les pointeurs sur la tete et la queue de la liste
 	(*list) = malloc(sizeof (List));
-	(*list)->head = NULL;
+	(*list)->head = NULL;		// pas d'éléments donc initialisation à NULL
 	(*list)->tail = NULL;
 }
 
@@ -10,13 +10,13 @@ void initialize (List** list) {	//création d'une structure avec les pointeurs s
 void insert_empty_list (List* list, char *str) {	//insertion dans une liste vide
 	Elem* new_elem = malloc (sizeof (Elem));
 	strcpy(new_elem->data, str);
-	list->head = new_elem;
+	list->head = new_elem;							// seul élément de la liste donc la tete et la queue pointent sur cet élement
 	list->tail = new_elem;
 }
 
 
 void insert_begining_list (List *list, char *str) {		// insertion en début de liste
-	if (list->head == NULL)
+	if (list->head == NULL)							// test si la liste est vide
 		insert_empty_list(list, str);
 	else {
 		Elem* new_elem = malloc (sizeof (Elem));
@@ -28,15 +28,17 @@ void insert_begining_list (List *list, char *str) {		// insertion en début de l
 }
 
 void insert_end_list (List *list, char *str) {		// insertion en fin de liste
-	if (list->tail == NULL)
+	if (list->tail == NULL)						// test si la liste est vide
 		insert_empty_list(list, str);
-	Elem* tmp = list->tail;
-	Elem* new_elem = malloc (sizeof (Elem));
-	strcpy (new_elem->data, str);
+	else {
+		Elem* tmp = list->tail;
+		Elem* new_elem = malloc (sizeof (Elem));
+		strcpy (new_elem->data, str);
 
-	new_elem->next = NULL;
-	tmp->next = new_elem;
-	list->tail = new_elem;
+		new_elem->next = NULL;
+		tmp->next = new_elem;
+		list->tail = new_elem;
+	}
 }
 
 int size_list (List *list) {		// renvoie la taille de la liste
@@ -176,6 +178,9 @@ void display (List *list) { //affiche la liste
 
 
 void destruct (List *list) {	//supprime toute la liste
+
+	/* TO DO */
+	
 	Elem* next_elem = list->head;
 	Elem* elem_destroy;
 

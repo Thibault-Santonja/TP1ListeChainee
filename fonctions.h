@@ -3,18 +3,18 @@
 #include <stdlib.h>
 
 #ifndef MAX
-#define MAX 10
+#define MAX 10		// nombre max d'elements dans data (structure Elem)
 #endif
 
 typedef struct element Elem;
-struct element
+struct element 		// liste chainée de data contenant un nombre
 {
 	char data[MAX];
 	Elem* next;
 };
 
 typedef struct list List;
-struct list
+struct list 		// structure gardant en mémoire la tete et queue de la liste
 {
 	Elem* head;
 	Elem* tail;

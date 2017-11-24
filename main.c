@@ -10,8 +10,8 @@ void menu () {
 	initialize (&ma_liste);
 	
 	while (flag) {
-		choix = 0;
-		while ((choix < 1) || (choix > 7))
+		choix = 0;	//RAZ du choix
+		while ((choix < 1) || (choix > 7))	//vérification qu'un choix valide a été fait
 		{
 			printf("que voulez vous faire ?\n");
 			printf ("1: voulez vous ajouter un nombre en début de liste ?\n");
@@ -23,7 +23,7 @@ void menu () {
 			printf ("7: voulez vous détruire la liste ?\n");
 			//choix = getchar ();
 			scanf("%d", &choix);
-			printf("%d\n", choix);
+			//printf("%d\n", choix);
 		}
 		switch (choix)
 		{
@@ -56,8 +56,8 @@ void menu () {
 				break;
 
 			case 5 :
-/*				if (!(sort()))
-					printf("error:sort\n");*/
+				/* if (!(sort()))
+				printf("error:sort\n");*/
 				break;
 
 			case 6 :
@@ -65,7 +65,7 @@ void menu () {
 				break;
 
 			case 7 :
-/*				destruct(ma_liste);*/
+				/* destruct(ma_liste);*/
 				break;
 		}
 		printf ("voulez vous continuer ? (oui : 1, non : 0)\n");
