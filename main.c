@@ -22,62 +22,44 @@ void menu () {
 		switch (choix)
 		{
 			case '1' :
-				printf ("voulez vous ajouter un nombre en début de liste ? (oui : 1, non : 0)\n");
-				if (flag) {
-					printf ("Saisissez votre nombre ?\n");
-					scanf ("%s", response);
-					insert_begining_list(ma_liste, response);
-				}
+				printf ("Saisissez votre nombre ?\n");
+				scanf ("%s", response);
+				insert_begining_list(ma_liste, response);
 				break;
 
 			case '2' :
-				printf ("voulez vous ajouter un nombre en fin de liste ? (oui : 1, non : 0)\n");
-				if (flag) {
-					printf ("Saisissez votre nombre ?\n");
-					scanf ("%s", response);
-					insert_end_list(ma_liste, response);
-				}
+				printf ("Saisissez votre nombre ?\n");
+				scanf ("%s", response);
+				insert_end_list(ma_liste, response);
 				break;
 			
 			case '3' :
-				printf ("voulez vous ajouter un nombre à une certaine position de la liste ? (oui : 1, non : 0)\n");
-				if (flag) {
-					printf ("Saisissez votre nombre ?\n");
-					scanf ("%s", response);
-					printf ("Où insérer votre nombre ?\n");
-					scanf ("%d", &place);
-					if (!insert_after_position(ma_liste, response, place))
-						printf("error:insert_after_position\n");
-				}
+				printf ("Saisissez votre nombre ?\n");
+				scanf ("%s", response);
+				printf ("Où insérer votre nombre ?\n");
+				scanf ("%d", &place);
+				if (!insert_after_position(ma_liste, response, place))
+					printf("error:insert_after_position\n");
 				break;
 			
 			case '4' :
-				printf ("voulez vous supprimer un nombre de la liste ? (oui : 1, non : 0)\n");
-				if (flag) {
 					printf ("Où supprimer votre nombre ?\n");
 					scanf ("%d", &place);
 					if (!(remove_(ma_liste, place)))
 						printf("error:remove\n");
-				}
 				break;
 
 			case '5' :
-				printf ("voulez vous trier la liste ? (oui : 1, non : 0)\n");
-				/*if (flag)
-					if (!(sort()))
-						printf("error:sort\n");*/
+/*				if (!(sort()))
+					printf("error:sort\n");*/
 				break;
 
 			case '6' :
-				printf ("voulez vous afficher la liste ? (oui : 1, non : 0)\n");
-				if (flag)
-					display(ma_liste);
+				display(ma_liste);
 				break;
 
 			case '7' :
-				printf ("voulez vous détruire la liste ? (oui : 1, non : 0)\n");
-				/*if (flag)
-					destruct(ma_liste);*/
+/*				destruct(ma_liste);*/
 				break;
 		}
 		printf ("voulez vous continuer ? (oui : 1, non : 0)\n");
