@@ -131,6 +131,7 @@ void remove_inside (List *list, int p) {	//suppression dans la liste
 
 int remove_ (List *list, int p) {	//"menu" de suppression
 	Elem* next_elem = list->head;
+	int size = size_list (list);
 
 	if ((next_elem == NULL) || p > size_list(list))			//erreur pas d'element, ou élément à supprimer inexistant
 		return 0;
@@ -141,11 +142,13 @@ int remove_ (List *list, int p) {	//"menu" de suppression
 	}
 	else if (p == 0)				//suppression du premier élément
 		remove_begining (list);
-	else if (p == size_list (list))	//suppression du dernier élément
+	else if (p == size)	//suppression du dernier élément
 		remove_ending (list);
-	else 							//sinon suppression en milieu de liste
+	else if (p < size) 							//sinon suppression en milieu de liste
 		remove_inside (list, p);
-
+	else
+		return 0;
+	
 	return 1;
 }
 
