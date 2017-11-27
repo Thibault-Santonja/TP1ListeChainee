@@ -58,13 +58,19 @@ int insert_after_position (List *list, char *str, int p) {	// insertion de str a
 	Elem* new_elem = malloc(sizeof (Elem));
 	Elem* next_elem = list->head;
 	int cmpt = 0;
+	int size = size_list (list);
+
+	if (size == 0) {
+		insert_empty_list (list, str);
+		return 1;
+	}
 
 	if (p == 0) {
 		insert_begining_list (list, str);
 		return 1;
 	}
 
-	if (p == size_list(list)) {
+	if (p == size) {
 		insert_end_list (list, str);
 		return 1;
 	}
@@ -158,14 +164,6 @@ int compare (char *str1, char *str2) {	//vérifie que str1 est plus grand que st
 }
 
 
-int sort (List *list) {	//tri la liste
-	
-	/* TODO */
-
-	return 1;
-}
-
-
 void display (List *list) { //affiche la liste
 	Elem* next_elem = list->head;
 	int cmpt = 1;
@@ -198,3 +196,85 @@ void destruct (List *list) {	//supprime toute la liste
 }
 
 
+
+int element_seul (List list)
+{
+    Elem elem = list.tete;
+    while (elem.data != 0)
+    {
+        if (elem.suiv == NULL)
+            return 1;
+        elem = elem.suiv;
+    }
+    if (elem.suiv == NULL)
+        return 1;
+    return 0;
+}
+
+
+char* read_nb (Elem elem)
+{
+    char* nb = "";
+    while (elem.data != 0 && elem.next != NULL)
+    {
+        nb += elem.data;
+    }
+    return nb;
+}
+
+
+
+char* nb_suivant (Elem elem)
+{
+    char * nb = "";
+    while (elem.data != 0)
+        elem = elem.next;
+    elem = elem.next; // elem est sur la premiere valeur a prendre en compte
+    while(elem.data != 0 && elem.next != NULL )
+    {
+        nb += elem.data;
+    }
+    return nb;
+}
+
+
+int concatener(List liste1, List liste2)
+{
+    liste1.tail = liste2.tete;
+}
+
+
+List sort (List *list) //--------------------------------------------------------------------------------------
+{
+    if (Elem_seul (list) == 1)
+        return list;
+    else
+    {
+
+        List superieurs;
+        initialize(superieurs);
+        insert_empty_list(superieurs, list.tete.data); // /!\ si pivot prend plusieurs cases !
+        // superieurs = pivot; Comment l'initialiser ?
+        List inferieurs;
+        initialize(inferieurs);
+        Elem pivot = list.head;
+        char * valeur_pivot;
+        Elem nb_a_comparer = list.head;
+        while (nb_a_comparer.tete != list.queue)
+        {
+            nb_a_comparer = nb_suiv (nb_a_comparer);
+            if (compare (nb_a_comparer, valeur_pivot) >= 0)
+                insert_nb(nb_a_comparer, superieurs); // nb_a_comparer est un char*, on doit inserer des Elems...
+            else
+                insert_nb(nb_a_comparer, inferieurs);
+        }
+    }
+    List liste_triee;
+
+    liste_triee = sort (inferieurs);
+    concatener (liste_triee, superieurs);
+    list = liste_triee;
+
+
+	return 0;
+} //---------------------------------------------------------------------------------------------------------------------------
