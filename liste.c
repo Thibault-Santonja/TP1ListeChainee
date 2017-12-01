@@ -58,25 +58,25 @@ int insert_after_position (List *list, char *str, int p) {	// insertion de str a
 	Elem* new_elem = malloc(sizeof (Elem));
 	Elem* next_elem = list->head;
 	int cmpt = 0;
-	int size = size_list (list);
+	int size = size_list (list);	// taile de la liste
 
-	if (size == 0) {
+	if (size == 0) {				// liste vide
 		insert_empty_list (list, str);
 		return 1;
 	}
 
-	if (p == 0) {
+	if (p == 0) {					// insertion au début
 		insert_begining_list (list, str);
 		return 1;
 	}
 
-	if (p == size) {
+	if (p == size) {				// insertion à la fin
 		insert_end_list (list, str);
 		return 1;
 	}
 
-	while (cmpt < p) {
-		if (next_elem == NULL)
+	while (cmpt < p) {				// recherche de la bonne position
+		if (next_elem == NULL)		// si on dépasse la fin de la liste on s'arrete
 			return 0;
 
 		next_elem = next_elem->next;
@@ -142,13 +142,13 @@ int remove_ (List *list, int p) {	//"menu" de suppression
 	}
 	else if (p == 0)				//suppression du premier élément
 		remove_begining (list);
-	else if (p == size)	//suppression du dernier élément
+	else if (p == size)				//suppression du dernier élément
 		remove_ending (list);
-	else if (p < size) 							//sinon suppression en milieu de liste
+	else if (p < size) 				//sinon suppression en milieu de liste
 		remove_inside (list, p);
 	else
 		return 0;
-	
+
 	return 1;
 }
 

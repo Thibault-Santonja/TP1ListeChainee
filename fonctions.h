@@ -47,3 +47,5 @@ void remove_begining (List* list);
 void remove_inside (List *list, int p);
 
 void remove_ending (List *list);
+
+
