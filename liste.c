@@ -133,9 +133,11 @@ int remove_ (List *list, int p) {	//"menu" de suppression
 	Elem* next_elem = list->head;
 	int size = size_list (list);
 
-	if ((next_elem == NULL) || p > size_list(list))			//erreur pas d'element, ou élément à supprimer inexistant
+	if ((next_elem == NULL) || p > size) {			//erreur pas d'element, ou élément à supprimer inexistant
+		printf("WARNING: position demandée trop grande !\n");
 		return 0;
-	else if (size_list < 2) {		//suppression si un seul élément
+	}
+	else if (size < 2) {		//suppression si un seul élément
 		free (list->head);
 		list->head = NULL;
 		list->tail = NULL;
@@ -154,37 +156,53 @@ int remove_ (List *list, int p) {	//"menu" de suppression
 
 
 int compare (char *str1, char *str2) {	//vérifie que str1 est plus grand que str2
-	int i = 1;
-	int res = 0;
-	unsigned int mult = 1;
+	int size_number = 0;
 
-	for (; i <= MAX; i++, mult *= 10) 
-		res = (str1 [MAX - i] - str2 [MAX - i]) * mult;
+	while ((*(str1 + size_number) != '\0') || (*(str2 + size_number) != '\0'))
+		size_number++;		// cherche la taille du plus petit nombre
 
-	if (res > 0)
-		return 1;
-	return 0;
+	if ((*(str1 + size_number) != '\0') && (*(str2 + size_number) == '\0'))
+		return 1;			// si str2 est le plus petit
+
+	if ((*(str1 + size_number) == '\0') && (*(str2 + size_number) != '\0'))
+		return 2;			// si str1 est le plus petit
+	
+	if ((*(str1 + size_number) == '\0') && (*(str2 + size_number) == '\0'))
+		for (int i = 0; i <= size_number; i++) {
+			if (*(str1 + i) > *(str2 + i))
+				return 1;	// si le chiffre de str1 est plus grand que str2
+			if (*(str1 + i) < *(str2 + i))
+				return 2;	// si le chiffre de str2 est plus grand que str1
+		}
+
+	printf("warning : error dans le code de la fonction\n");
+	return 0; //erreur
 }
 
 
 void display (List *list) { //affiche la liste
 	Elem* next_elem = list->head;
 	int cmpt = 1;
+	int i = 0;
 
 	while (next_elem != NULL) {
-		printf("position %d : %d\n", cmpt, next_elem->data[cmpt - 1]);
+		printf("position %d : ", cmpt);
+		for (i = 0; (next_elem->data + i) != '\0'; i++)
+			printf("%c", (next_elem->data + i));
+		printf("\n");
 		next_elem = next_elem->next;
 		cmpt++;
 	}
 }
 
 
-void destruct (List *list) {	//supprime toute la liste
+
+void destruct (List **list) {	//supprime toute la liste
 
 	/* TO DO */
 
-	Elem* next_elem = list->head;
-	Elem* elem_destroy;
+	Elem* next_elem = (*list)->head;
+	Elem* elem_destroy;	//tmp mem
 
 	while (next_elem != NULL) {
 		free (next_elem->data);
@@ -193,9 +211,9 @@ void destruct (List *list) {	//supprime toute la liste
 		free (elem_destroy);
 	}
 
-	free (list->head);
-	free (list->tail);
-	free (list);
+	free (*list);
+
+	*list = NULL;
 }
 
 
@@ -246,7 +264,7 @@ int concatener(List liste1, List liste2)
     liste1.tail = liste2.tete;
 }
 
-/*
+
 List sort (List *list) //--------------------------------------------------------------------------------------
 {
     if (Elem_seul (list) == 1)

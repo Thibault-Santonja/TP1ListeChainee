@@ -13,9 +13,11 @@ static void clean_ (char *chaine) // permet de supprimer le retour à la ligne
     char *p = strchr(chaine, '\n');
 
     if (p)
-        *p = '\0';
-    else
+        p = '\0';
+    else {
     	clean_buffer();
+    	chaine[MAX - 1] = '\0';
+    }
 }
 
 static void input_number (char* response) {
