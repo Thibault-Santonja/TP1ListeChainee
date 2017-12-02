@@ -199,7 +199,7 @@ void destruct (List *list) {	//supprime toute la liste
 }
 
 
-
+/*
 int element_seul (List list)
 {
     Elem elem = list.tete;
@@ -246,7 +246,7 @@ int concatener(List liste1, List liste2)
     liste1.tail = liste2.tete;
 }
 
-
+/*
 List sort (List *list) //--------------------------------------------------------------------------------------
 {
     if (Elem_seul (list) == 1)
@@ -281,3 +281,4 @@ List sort (List *list) //-------------------------------------------------------
 
 	return 0;
 } //---------------------------------------------------------------------------------------------------------------------------
+*/

@@ -1,18 +1,50 @@
 #include "fonctions.h"
 
-void menu () {
+static void clean_buffer (void) { //nettoie le buffer si on a saisie trop de caractères
+	int c;
+
+	printf("WARNNG: dépassement du nombre de caractères autorisés\n");
+
+	while ((c = getchar()) != '\n' && c != EOF); //EOF = End Of File
+}
+
+static void clean_ (char *chaine) // permet de supprimer le retour à la ligne
+{
+    char *p = strchr(chaine, '\n');
+
+    if (p)
+        *p = '\0';
+    else
+    	clean_buffer();
+}
+
+static void input_number (char* response) {
+	int ret = 0;
+	int number = 0;
+
+	do {
+		printf ("Saisissez votre nombre : ");
+		fgets(response, sizeof response, stdin);
+		clean_ (response); //suppression du retour à la ligne OU nettoyage BUFFER
+		ret = sscanf(response, "%d", &number);
+	} while (ret != 1);
+
+	printf("vous avez saisie : %d\n", number);
+}
+
+static void menu (void) {	//static car on ne va pas appeler cette fonction hors de ce fichier
 	int flag = 1;
-	char* response = malloc (sizeof (char) * MAX);
+	char response[MAX];
 	int place = 0;
 	int choix = 0;
 	List* ma_liste = NULL;
+	int c;
 
 	initialize (&ma_liste);
 	
 	while (flag) {
-		choix = 0;	//RAZ du choix
-		while ((choix < 1) || (choix > 7))	//vérification qu'un choix valide a été fait
-		{
+		do {	//vérification qu'un choix valide a été fait
+			choix = 0;	//RAZ du choix
 			printf("que voulez vous faire ?\n");
 			printf ("1: voulez vous ajouter un nombre en début de liste ?\n");
 			printf ("2: voulez vous ajouter un nombre en fin de liste ?\n");
@@ -21,27 +53,23 @@ void menu () {
 			printf ("5: voulez vous trier la liste ?\n");
 			printf ("6: voulez vous afficher la liste ?\n");
 			printf ("7: voulez vous détruire la liste ?\n");
-			//choix = getchar ();
-			scanf("%d", &choix);
-			//printf("%d\n", choix);
-		}
+			scanf ("%d", &choix);
+			while ((c = getchar()) != '\n' && c != EOF); //EOF = End Of File
+		} while ((choix < 1) || (choix > 7));
 		switch (choix)
 		{
 			case 1 :
-				printf ("Saisissez votre nombre ?\n");
-				scanf ("%s", response);
+				input_number(response); 
 				insert_begining_list(ma_liste, response);
 				break;
 
 			case 2 :
-				printf ("Saisissez votre nombre ?\n");
-				scanf ("%s", response);
+				input_number(response);
 				insert_end_list(ma_liste, response);
 				break;
 			
 			case 3 :
-				printf ("Saisissez votre nombre ?\n");
-				scanf ("%s", response);
+				input_number(response);
 				printf ("Où insérer votre nombre ?\n");
 				scanf ("%d", &place);
 				if (!insert_after_position(ma_liste, response, place))
@@ -70,6 +98,7 @@ void menu () {
 		}
 		printf ("voulez vous continuer ? (oui : 1, non : 0)\n");
 		scanf ("%d", &flag);
+		choix = 0;	//RAZ du choix
 	}
 }
 
