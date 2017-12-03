@@ -60,7 +60,7 @@ int insert_after_position (List *list, char *str, int p) {	// insertion de str a
 	int cmpt = 0;
 	int size = size_list (list);	// taile de la liste
 
-	if (size == 0) {				// liste vide
+	if (size == 0 && p == 1) {		// liste vide
 		insert_empty_list (list, str);
 		return 1;
 	}
@@ -117,9 +117,9 @@ void remove_ending (List *list) {	//suppression fin de liste
 void remove_inside (List *list, int p) {	//suppression dans la liste
 	Elem* next_elem = list->head;
 	Elem* temp = NULL;
-	int cmpt = 0;
+	int cmpt = 1;
 
-	while (cmpt < p) {		
+	while (cmpt <= p) {		
 		next_elem = next_elem->next;
 		cmpt++;
 	}
@@ -137,12 +137,12 @@ int remove_ (List *list, int p) {	//"menu" de suppression
 		printf("WARNING: position demandée trop grande !\n");
 		return 0;
 	}
-	else if (size < 2) {		//suppression si un seul élément
+	else if (size < 2 && p == 1) {		//suppression si un seul élément
 		free (list->head);
 		list->head = NULL;
 		list->tail = NULL;
 	}
-	else if (p == 0)				//suppression du premier élément
+	else if (p == 1)				//suppression du premier élément
 		remove_begining (list);
 	else if (p == size)				//suppression du dernier élément
 		remove_ending (list);
@@ -175,8 +175,8 @@ int compare (char *str1, char *str2) {	//vérifie que str1 est plus grand que st
 				return 2;	// si le chiffre de str2 est plus grand que str1
 		}
 
-	printf("warning : error dans le code de la fonction\n");
-	return 0; //erreur
+	printf("warning : error dans le code de la fonction\n"); //erreur dans le code...
+	return 0;
 }
 
 
@@ -186,36 +186,57 @@ void display (List *list) { //affiche la liste
 	int i = 0;
 
 	while (next_elem != NULL) {
-		printf("position %d : ", cmpt);
-		for (i = 0; (next_elem->data + i) != '\0'; i++)
-			printf("%c", (next_elem->data + i));
-		printf("\n");
+		printf("\nposition %d : ", cmpt);
+
+		for (i = 0; (*(next_elem->data + i) != '\0') /*&& i < MAX*/; i++) // "&& i < MAX;" sécurité au cas où on ne trouve pas '\0'
+			printf("%c", *(next_elem->data + i));
+
 		next_elem = next_elem->next;
 		cmpt++;
 	}
+	printf("\n");
 }
 
 
 
 void destruct (List **list) {	//supprime toute la liste
+	if ((*list)->head != NULL) {	
+		Elem* next_elem = (*list)->head;
+		Elem* elem_destroy;
 
-	/* TO DO */
+		while (next_elem != NULL) {
+			elem_destroy = next_elem;
+			next_elem = elem_destroy->next;
+			// free (elem_destroy->data); déjà réalisé avec free (elem_destroy);
+			free (elem_destroy);
+		}
 
-	Elem* next_elem = (*list)->head;
-	Elem* elem_destroy;	//tmp mem
+		free (*list);
 
-	while (next_elem != NULL) {
-		free (next_elem->data);
-		elem_destroy = next_elem;
-		next_elem = next_elem->next;
-		free (elem_destroy);
+		*list = NULL;
 	}
-
-	free (*list);
-
-	*list = NULL;
 }
 
+
+int sort (List *list) {
+	int size = size_list(list);
+
+	if (size == 0)
+	{
+		printf("error:liste.c:sort:pas d'éléments à trier\n");
+		return 0;
+	}
+	if (size == 1)
+		return 1; //un seul elemn donc liste triée
+	
+	int flag = 0;
+	Elem* prec_elem = list->head;
+	Elem* actu_elem = prec_elem->next;
+	Elem* suiv_elem = actu_elem->next;
+
+	for (int i = 0; i <= size; i++)
+
+}
 
 /*
 int element_seul (List list)

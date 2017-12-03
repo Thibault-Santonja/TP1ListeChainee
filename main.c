@@ -13,10 +13,10 @@ static void clean_ (char *chaine) // permet de supprimer le retour à la ligne
     char *p = strchr(chaine, '\n');
 
     if (p)
-        p = '\0';
+        *p = '\0';
     else {
     	clean_buffer();
-    	chaine[MAX - 1] = '\0';
+    	chaine[MAX] = '\0';
     }
 }
 
@@ -34,7 +34,7 @@ static void input_number (char* response) {
 	printf("vous avez saisie : %d\n", number);
 }
 
-static void menu (void) {	//static car on ne va pas appeler cette fonction hors de ce fichier
+static int menu (void) {	//static car on ne va pas appeler cette fonction hors de ce fichier
 	int flag = 1;
 	char response[MAX];
 	int place = 0;
@@ -58,6 +58,7 @@ static void menu (void) {	//static car on ne va pas appeler cette fonction hors 
 			scanf ("%d", &choix);
 			while ((c = getchar()) != '\n' && c != EOF); //EOF = End Of File
 		} while ((choix < 1) || (choix > 7));
+		
 		switch (choix)
 		{
 			case 1 :
@@ -86,8 +87,8 @@ static void menu (void) {	//static car on ne va pas appeler cette fonction hors 
 				break;
 
 			case 5 :
-				/* if (!(sort()))
-				printf("error:sort\n");*/
+				if (!(sort()))
+					printf("error:sort\n");
 				break;
 
 			case 6 :
@@ -95,18 +96,22 @@ static void menu (void) {	//static car on ne va pas appeler cette fonction hors 
 				break;
 
 			case 7 :
-				/* destruct(ma_liste);*/
+				destruct(&ma_liste);
+				return 0;
 				break;
 		}
 		printf ("voulez vous continuer ? (oui : 1, non : 0)\n");
 		scanf ("%d", &flag);
 		choix = 0;	//RAZ du choix
 	}
+	return 0;
 }
 
 int main()
 {
 	menu ();
+
+	printf("Merci et à bientôt !\n");
 
 	return 0;
 }
