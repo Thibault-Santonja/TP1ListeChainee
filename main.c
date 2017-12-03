@@ -87,7 +87,7 @@ static int menu (void) {	//static car on ne va pas appeler cette fonction hors d
 				break;
 
 			case 5 :
-				if (!(sort()))
+				if (!(sort(ma_liste)))
 					printf("error:sort\n");
 				break;
 

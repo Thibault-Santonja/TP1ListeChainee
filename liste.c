@@ -229,13 +229,30 @@ int sort (List *list) {
 	if (size == 1)
 		return 1; //un seul elemn donc liste triée
 	
-	int flag = 0;
-	Elem* prec_elem = list->head;
-	Elem* actu_elem = prec_elem->next;
-	Elem* suiv_elem = actu_elem->next;
+	int pos = 0;
+	Elem* max_elem = list->head;
+	Elem* test_elem = max_elem->next;
 
-	for (int i = 0; i <= size; i++)
+	for (int i = 1; i <= size; i++) {
+		max_elem = list->head;
 
+		for (int k = 1; k < i; k++)
+		{
+			max_elem = max_elem->next;
+		}
+
+		for (int j = i; j <= size; ++j)
+		{
+			if (compare(test_elem->data, max_elem->data) == 1) {
+				max_elem = test_elem;
+				pos = j;
+			}
+			test_elem = test_elem->next;
+		}
+		insert_begining_list(list, max_elem->data);		// insertion du plus grand au début
+		remove_(list, (pos + 1));						// suppresion de l'actuel plus grand
+	}
+	return 1;
 }
 
 /*
