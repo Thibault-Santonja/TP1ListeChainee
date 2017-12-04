@@ -1,11 +1,10 @@
 # TP1ListeChainee
 TP1 NF16 UTC
 
+→ RAPPORT : https://docs.google.com/document/d/1q4IyxDVH0JmnXJMF71ahcJaE64fjep2uksgnMBzWS2A/edit?usp=sharing
+
 → TODO : 
   - Divers problèmes de segmentation fault à gérer
-  - Le Sort à faire correctement (déjà en parti fait mais pas fonctionnel)
-  - Corriger la saisie
-  - Corriger destruct
 
 
 → COMPILATION : 
