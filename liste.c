@@ -175,8 +175,7 @@ int compare (char *str1, char *str2) {	//vérifie que str1 est plus grand que st
 				return 2;	// si le chiffre de str2 est plus grand que str1
 		}
 
-	printf("warning : error dans le code de la fonction\n"); //erreur dans le code...
-	return 0;
+	return 2; //nombres égaux
 }
 
 
@@ -188,7 +187,7 @@ void display (List *list) { //affiche la liste
 	while (next_elem != NULL) {
 		printf("\nposition %d : ", cmpt);
 
-		for (i = 0; (*(next_elem->data + i) != '\0') /*&& i < MAX*/; i++) // "&& i < MAX;" sécurité au cas où on ne trouve pas '\0'
+		for (i = 0; (*(next_elem->data + i) != '\0'); i++) 
 			printf("%c", *(next_elem->data + i));
 
 		next_elem = next_elem->next;
@@ -234,18 +233,17 @@ int sort (List *list) {
 	Elem* test_elem = max_elem->next;
 
 	for (int i = 1; i <= size; i++) {
-		max_elem = list->head;
+		max_elem = list->head;							// on réinitialise max_elem
 
 		for (int k = 1; k < i; k++)
-		{
-			max_elem = max_elem->next;
-		}
+			max_elem = max_elem->next;					// on accéde à la suite de la liste
+		test_elem = max_elem->next;						// on réinitialise test_elem
 
-		for (int j = i; j <= size; ++j)
+		for (int j = i; j < size; ++j)
 		{
-			if (compare(test_elem->data, max_elem->data) == 1) {
+			if (compare(test_elem->data, max_elem->data) == 1) {	// on compare avec notre max
 				max_elem = test_elem;
-				pos = j;
+				pos = j;								// on garde en mémoire la position de max
 			}
 			test_elem = test_elem->next;
 		}

@@ -20,7 +20,7 @@ struct list 		// structure gardant en mémoire la tete et queue de la liste
 	Elem* tail;
 };
 
-void initialize (List **list);
+void initialize (List **list);	//** car on modifie la valeur de la liste
 
 void insert_empty_list (List *list, char *str);
 
@@ -38,7 +38,7 @@ int sort (List *list);
 
 void display (List *list);
 
-void destruct (List **list);
+void destruct (List **list);	//** car on modifie la valeur de la liste
 
 int size_list (List *list);
 
