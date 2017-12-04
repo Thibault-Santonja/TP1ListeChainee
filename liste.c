@@ -1,5 +1,4 @@
 #include "fonctions.h"
-//#include "quicksort.c"
 
 void initialize (List** list) {	// création d'une structure avec les pointeurs sur la tete et la queue de la liste
 	(*list) = malloc(sizeof (List));
